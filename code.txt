@@ -1,0 +1,33 @@
+# Set up some constants
+Kp = 1.0  # Proportional gain
+Ki = 0.1  # Integral gain
+Kd = 0.05  # Derivative gain
+setpoint = 0  # We want the stick straight up
+
+# Initialize some stuff
+integral = 0
+previous_error = 0
+
+while True:
+    # Check the angle
+    current_angle = read_angle_sensor()
+    
+    # Figure out how far off we are
+    error = setpoint - current_angle
+    
+    # Do the PID math
+    proportional = Kp * error
+    integral += Ki * error
+    derivative = Kd * (error - previous_error)
+    
+    # Add it all up
+    control_output = proportional + integral + derivative
+    
+    # Push the cart
+    apply_force(control_output)
+    
+    # Remember for next time
+    previous_error = error
+    
+    # Wait a bit
+    wait(control_interval)
