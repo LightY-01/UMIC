@@ -1,79 +1,63 @@
-Prime Factorization Client-Server Application
-This project contains a simple client-server application that computes the unique prime factors of a given positive integer. The server processes the input received from the client and returns the prime factors of the integer.
+# Prime Factorization Server/Client
 
-Files
-server.py: A TCP server that listens for incoming connections, receives a number from a client, computes its unique prime factors, and sends the result back to the client.
-client.py: A TCP client that connects to the server, sends a positive integer input, and displays the prime factors returned by the server.
-Prerequisites
-Python 3.x
-A working internet or localhost connection for client-server communication
-The socket library, which is included in the Python standard library
-Setup and Running Instructions
-Step 1: Clone or Download the Repository
-Download or clone the project folder to your local machine.
+This project implements a simple client-server application that calculates the prime factorization of positive integers. The server listens for incoming connections, receives numbers from clients, computes their prime factors, and sends the results back to the clients.
 
-Step 2: Run the Server
-Open a terminal or command prompt.
+## Prerequisites
 
-Navigate to the folder containing the server.py file.
+- Python 3.6 or higher
 
-Run the server script using the following command:
+## Files
 
-bash
-Copy code
-python server.py
-The server will start and listen for incoming client connections on 127.0.0.1:65432 (localhost).
+- `server.py`: The server-side script that listens for connections and computes prime factors.
+- `client.py`: The client-side script that connects to the server and sends numbers for factorization.
 
-You should see output like:
+## Running the Application
 
-bash
-Copy code
-Server listening on 127.0.0.1:65432
-Step 3: Run the Client
-Open another terminal or command prompt.
-Navigate to the folder containing the client.py file.
-Run the client script using the following command:
-bash
-Copy code
-python client.py
-You should see output indicating that the client has connected to the server:
-bash
-Copy code
-Connected to server at 127.0.0.1:65432
-Step 4: Interact with the Application
-The client will prompt you to enter a positive integer.
+### Starting the Server
 
-Enter a number (e.g., 12) and press Enter. The server will compute and return the unique prime factors. You should see output similar to:
+1. Open a terminal or command prompt.
+2. Navigate to the directory containing the project files.
+3. Run the following command:
 
-bash
-Copy code
-Enter a positive integer (or 'q' to quit): 12
-Prime factorization: 2, 3
-If you enter an invalid number (e.g., negative or a non-integer value), the server will return an appropriate error message.
+   ```
+   python server.py
+   ```
 
-Enter 'q' to quit the client.
+4. You should see a message indicating that the server is listening on 127.0.0.1:65432.
 
-Example Session
-Here’s an example of a session from the client side:
+### Running the Client
 
-Connected to server at 127.0.0.1:65432
-Enter a positive integer (or 'q' to quit): 28
-Prime factorization: 2, 7
-Enter a positive integer (or 'q' to quit): 1
-Prime factorization: 1
-Enter a positive integer (or 'q' to quit): -5
-Prime factorization: Invalid input. Please send a positive integer.
-Enter a positive integer (or 'q' to quit): abc
-Prime factorization: Invalid input. Please send a positive integer.
-Enter a positive integer (or 'q' to quit): q
-Error Handling
-If the input is not a valid integer, the server responds with the message: Invalid input. Please send a positive integer.
-If a negative number or zero is entered, the same message is sent.
-Notes
-The server will run indefinitely and can handle multiple client connections sequentially. Each client must connect one at a time.
-The prime factors of 1 are returned as {1}, which is a special case handled by the prime_factors() function.
-Ensure that the server is running before you attempt to connect with the client.
-Both the server and client scripts are designed to run on the same machine (localhost). To run the application over a network, adjust the host IP address accordingly.
-Exiting the Program
-To stop the client, enter q when prompted.
-To stop the server, press CTRL + C in the terminal running the server.
+1. Open a new terminal or command prompt (keep the server running in the first one).
+2. Navigate to the directory containing the project files.
+3. Run the following command:
+
+   ```
+   python client.py
+   ```
+
+4. You should see a message indicating that the client has connected to the server.
+5. Follow the prompts to enter positive integers for prime factorization.
+6. Enter 'q' to quit the client application.
+
+## Testing the Application
+
+1. Ensure the server is running in one terminal.
+2. Start the client in another terminal.
+3. Test various scenarios:
+   - Enter positive integers (e.g., 12, 97, 100) and verify the correct prime factorization is returned.
+   - Enter 1 and verify it returns {1}.
+   - Enter negative numbers or non-integer values to test error handling.
+   - Enter very large numbers (e.g., 123456789) to test performance with big integers.
+4. Quit the client by entering 'q'.
+5. You can run multiple client instances simultaneously to test concurrent connections.
+
+## Notes
+
+- The server runs indefinitely until manually terminated (e.g., by pressing Ctrl+C).
+- The client will disconnect after entering 'q', but the server will continue running and accepting new connections.
+- For security reasons, this application only accepts connections from localhost (127.0.0.1). Modify the `host` variable in both scripts if you want to allow remote connections.
+
+## Troubleshooting
+
+- If you encounter a "Address already in use" error when starting the server, ensure no other application is using port 65432, or modify the `port` variable in both scripts to use a different port number.
+- If the client fails to connect, ensure the server is running and that both scripts are using the same host and port numbers.
